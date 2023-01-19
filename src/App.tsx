@@ -1,25 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+
+import { objFromAxios, objFromFetch } from './SOLID + DI';
 
 function App() {
+
+  const fetchUsersWithFetch = async () => {
+    const users = await objFromFetch.getUsers();
+
+    console.log('usersFromFetch', users);
+  }
+
+  const fetchUsersWithAxios = async () => {
+    const users = await objFromAxios.getUsers();
+
+    console.log('usersFromAxios', users);
+  }
+
+  useEffect(() => {
+    fetchUsersWithAxios();
+    fetchUsersWithFetch();
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className="App" />
   );
 }
 
